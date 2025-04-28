@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Para a minha princesa</title>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -21,6 +18,9 @@
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
     .container {
       background: rgba(255,255,255,0.9);
@@ -31,6 +31,8 @@
       width: 100%;
       text-align: center;
       animation: fadeIn 1s ease-in-out;
+      position: relative;
+      z-index: 2;
     }
     h1, h2 { font-family: 'Playfair Display', serif; color: #264a60; margin-bottom: 20px; }
     h1 { font-size: 2.8em; }
@@ -54,22 +56,62 @@
     #hiddenContent { display: none; margin-top: 20px; text-align: left; }
     .signature { margin-top: 40px; font-style: italic; font-size: 1.3em; text-align: right; color: #264a60; }
     .footer { margin-top: 30px; font-size: 0.9em; color: #555; text-align: center; }
+    .hearts {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+      display: none;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff385c;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      opacity: 0.8;
+      animation: floatUp 7s linear infinite;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.5) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    .image-container { margin-top: 20px; display: block; text-align: center; }
+    .image-container img { width: 100%; border-radius: 10px; margin-bottom: 20px; }
+    .red-background {
+      background: rgba(255, 0, 0, 0.5);
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      display: none;
+      animation: redFade 7s forwards;
+    }
+    @keyframes redFade {
+      0% { opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { opacity: 0; }
+    }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
-    /* Quiz Sidebar */
-    #quizSidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; background-color: #fff; box-shadow: 2px 0 10px rgba(0,0,0,0.3); padding: 20px; transition: left 0.3s ease; overflow-y: auto; }
-    #quizSidebar.open { left: 0; }
-    .question { margin-top: 20px; font-size: 1.2em; text-align: left; }
-    .answer-btn { margin: 10px 0; padding: 10px; width: 100%; background-color: #2f8cdb; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; text-align: left; }
-    .answer-btn:hover { background-color: #1a6e9c; transform: translateY(-2px); }
-    .correct { background-color: #28a745 !important; }
-    .incorrect { background-color: #e74c3c !important; }
-    @media (max-width: 768px) { h1 { font-size: 2.2em; } h2 { font-size: 1.8em; } p, li { font-size: 1.1em; } button, .answer-btn { padding: 10px 20px; font-size: 0.9em; } #quizSidebar { width: 100%; } }
-    .center-text { text-align: center; } /* Novo estilo para centralizar o texto */
+    .center-text { text-align: center; }
   </style>
 </head>
 <body>
 
+  <div class="red-background" id="redBackground"></div>
 
+  <div class="hearts" id="heartsContainer"></div>
 
   <div class="container" id="firstSection">
     <h1 class="center-text">Para a minha princesa</h1>
@@ -81,7 +123,7 @@
   <div class="container" id="nextSection">
     <h2>Por que te amo?</h2>
     <ul>
-      <li>Seu sorriso ilumina meus dias, mesmo de longe.</li>
+      <li>Você me faz querer um futuro</li>
       <li>A forma como você me entende sem eu precisar dizer nada.</li>
       <li>Cada "te amo" seu faz meu coração bater mais forte.</li>
       <li>Você me inspira a sempre melhorar todos os dias.</li>
@@ -91,13 +133,15 @@
       <img src="https://i.imgur.com/XmQCN1W.jpeg" alt="Minha gatinha" style="width:100%; border-radius:10px; margin-bottom:20px;">
     </div>
     <button id="revealBtn">Clique se quiser ver gayzisse</button>
-    <div id="hiddenContent">
-      <p>Sei que você deve ter ficado brava com a última foto, mas queria que você entendesse que você é linda de qualquer jeito, meu amor. Eu decidi fazer isso agora porque eu gosto de te mostrar o quanto eu te amo, e porque eu sou bem gay por você, não posso negar ksks. Eu sei que depois de tudo você fica se crucificando muito por tudo que aconteceu, mas de verdade, amor, eu quero que você entenda seus erros, mas não sofra com eles pra sempre, porque dói pra crlh ver a pessoa que eu mais amo nesse mundo sofrendo. Às vezes eu sei que você pensa um monte de besteiras, como se não me merecesse, e que só me machuca. Sei até que pensou coisas mais pesadas... Mas saiba que eu não me arrependo nem um segundo de ter mandado mensagem pra aquela garota naquele dia. Se eu não tivesse mandado, eu não estaria com essa pessoa incrível hoje, e eu ainda sei que você é a pessoa certa pra mim. Bom, então me desculpa por ser meio chato às vezes e por fazer você se sentir mal. E obrigado, amor, por estar se esforçando tanto por a gente, eu reconheço e reparo em cada esforço.
+  </div>
+
+  <div class="container" id="hiddenContent">
+    <p>Sei que você deve ter ficado brava com a última foto, mas queria que você entendesse que você é linda de qualquer jeito, meu amor. Eu decidi fazer isso agora porque eu gosto de te mostrar o quanto eu te amo, e porque eu sou bem gay por você, não posso negar ksks. Eu sei que depois de tudo você fica se crucificando muito por tudo que aconteceu, mas de verdade, amor, eu quero que você entenda seus erros, mas não sofra com eles pra sempre, porque dói pra crlh ver a pessoa que eu mais amo nesse mundo sofrendo. Às vezes eu sei que você pensa um monte de besteiras, como se não me merecesse, e que só me machuca. Sei até que pensou coisas mais pesadas... Mas saiba que eu não me arrependo nem um segundo de ter mandado mensagem pra aquela garota naquele dia. Se eu não tivesse mandado, eu não estaria com essa pessoa incrível hoje, e eu ainda sei que você é a pessoa certa pra mim. Bom, então me desculpa por ser meio chato às vezes e por fazer você se sentir mal. E obrigado, amor, por estar se esforçando tanto por a gente, eu reconheço e reparo em cada esforço.
 
 Bom, agora é a parte gay, né? Te amo muuuuuuuuuuuito, minha gatinha ❤️ Obrigado por ter entrado na minha vida. Mesmo você sendo fedida, ainda vou casar com você ❤️ Existe declaração maior que essa?</p>
-      <p>Te amo minha princesa❤️</p>
-      <p class="signature">Ass, Zé</p>
-    </div>
+    <p>Te amo minha princesa❤️</p>
+    <p class="signature">Ass, Seu Homem</p>
+    <button id="backBtn">Voltar para o início</button>
   </div>
 
   <script>
@@ -105,21 +149,46 @@ Bom, agora é a parte gay, né? Te amo muuuuuuuuuuuito, minha gatinha ❤️ Obr
     const nextSection = document.getElementById('nextSection');
     const revealBtn = document.getElementById('revealBtn');
     const hiddenContent = document.getElementById('hiddenContent');
-    const quizSidebar = document.getElementById('quizSidebar');
-    const quizBtn = document.getElementById('quizBtn');
-    const finishBtn = document.getElementById('finishBtn');
+    const backBtn = document.getElementById('backBtn');
+    const firstSection = document.getElementById('firstSection');
+    const redBackground = document.getElementById('redBackground');
+    const heartsContainer = document.getElementById('heartsContainer');
 
     nextBtn.addEventListener('click', () => {
+      firstSection.style.display = 'none';
       nextSection.classList.toggle('visible');
-      nextBtn.textContent = nextSection.classList.contains('visible') ? 'Voltar' : 'Próxima parte';
     });
 
     revealBtn.addEventListener('click', () => {
-      hiddenContent.style.display = hiddenContent.style.display === 'block' ? 'none' : 'block';
+      nextSection.style.display = 'none';
+      hiddenContent.style.display = 'block';
+      redBackground.style.display = 'block';
+      heartsContainer.style.display = 'block';
+
+      createHearts();
+      setTimeout(() => {
+        redBackground.style.display = 'none';
+        heartsContainer.style.display = 'none';
+      }, 7000); // 7 segundos
     });
 
-    quizBtn.addEventListener('click', () => quizSidebar.classList.add('open'));
-    function closeQuiz() { quizSidebar.classList.remove('open'); }
+    backBtn.addEventListener('click', () => {
+      hiddenContent.style.display = 'none';
+      firstSection.style.display = 'block';
+    });
+
+    function createHearts() {
+      heartsContainer.innerHTML = '';
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = (Math.random() * 7) + 's';
+        heart.style.width = '20px';
+        heart.style.height = '20px';
+        heartsContainer.appendChild(heart);
+      }
+    }
   </script>
 
 </body>
