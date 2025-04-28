@@ -1,67 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Para a minha princesa</title>
-    <style>
-        body {
-            background-color: #add8e6; /* Cor de fundo azul suave */
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        h1 {
-            font-size: 3.5em;
-            margin-top: 30px;
-            font-family: 'Georgia', serif;
-            text-transform: uppercase;
-        }
-        p {
-            font-size: 1.5em;
-            margin: 20px 0;
-            text-align: center;
-            font-weight: bold;
-        }
-        img {
-            width: 300px;
-            border-radius: 20px;
-            margin: 20px 0;
-            transition: transform 0.3s ease;
-        }
-        img:hover {
-            transform: scale(1.1);
-        }
-        .footer {
-            margin-top: 50px;
-            font-size: 1.2em;
-            color: #ddd;
-        }
-        audio {
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para a minha princesa</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.4), transparent),
+                  linear-gradient(to bottom right, #f0d5ff, #c6b3e6);
+      background-blend-mode: overlay;
+      font-family: 'Montserrat', sans-serif;
+      color: #264a60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(255,255,255,0.9);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    h1, h2 { font-family: 'Playfair Display', serif; color: #264a60; margin-bottom: 20px; }
+    h1 { font-size: 2.8em; }
+    h2 { font-size: 2.2em; }
+    p, li { font-size: 1.3em; line-height: 1.5; margin: 20px 0; color: #264a60; text-align: left; }
+    button {
+      margin: 10px;
+      padding: 12px 24px;
+      font-size: 1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #2f8cdb;
+      color: #fff;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    button:hover { transform: translateY(-2px); background-color: #1a6e9c; }
+    #nextSection { display: none; opacity: 0; transition: opacity 0.6s ease; margin-top: 40px; }
+    #nextSection.visible { display: block; opacity: 1; }
+    #hiddenContent { display: none; margin-top: 20px; text-align: left; }
+    .signature { margin-top: 40px; font-style: italic; font-size: 1.3em; text-align: right; color: #264a60; }
+    .footer { margin-top: 30px; font-size: 0.9em; color: #555; text-align: center; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
+    /* Quiz Sidebar */
+    #quizSidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; background-color: #fff; box-shadow: 2px 0 10px rgba(0,0,0,0.3); padding: 20px; transition: left 0.3s ease; overflow-y: auto; }
+    #quizSidebar.open { left: 0; }
+    .question { margin-top: 20px; font-size: 1.2em; text-align: left; }
+    .answer-btn { margin: 10px 0; padding: 10px; width: 100%; background-color: #2f8cdb; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; text-align: left; }
+    .answer-btn:hover { background-color: #1a6e9c; transform: translateY(-2px); }
+    .correct { background-color: #28a745 !important; }
+    .incorrect { background-color: #e74c3c !important; }
+    @media (max-width: 768px) { h1 { font-size: 2.2em; } h2 { font-size: 1.8em; } p, li { font-size: 1.1em; } button, .answer-btn { padding: 10px 20px; font-size: 0.9em; } #quizSidebar { width: 100%; } }
+    .center-text { text-align: center; } /* Novo estilo para centralizar o texto */
+  </style>
 </head>
 <body>
-    <h1>Para a minha princesa</h1>
-    <p>Mesmo de longe, você é a pessoa que deixa tudo mais bonito.</p>
-    <img src="https://i.pinimg.com/originals/70/90/88/7090887c1d57a97dc0b1f055853175d5.gif" alt="Love gif">
-    <p>Te amo mais do que palavras podem dizer 💙</p>
 
-    <!-- Música de fundo com efeito loop -->
-    <audio autoplay loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/10/12/audio_bfd6c8e076.mp3?filename=wholesome-122461.mp3" type="audio/mpeg">
-        Seu navegador não suporta áudio.
-    </audio>
 
-    <div class="footer">
-        Feito com amor 💙
+
+  <div class="container" id="firstSection">
+    <h1 class="center-text">Para a minha princesa</h1>
+    <p class="center-text">Você é o meu mundo, <strong>Sofia Bativa</strong>.</p>
+    <button id="nextBtn">Próxima parte</button>
+    <div class="footer">Feito com amor ❤️</div>
+  </div>
+
+  <div class="container" id="nextSection">
+    <h2>Por que te amo?</h2>
+    <ul>
+      <li>Seu sorriso ilumina meus dias, mesmo de longe.</li>
+      <li>A forma como você me entende sem eu precisar dizer nada.</li>
+      <li>Cada "te amo" seu faz meu coração bater mais forte.</li>
+      <li>Você me inspira a sempre melhorar todos os dias.</li>
+    </ul>
+    <div class="gallery">
+      <h3>Você mor, linda:</h3>
+      <img src="https://i.imgur.com/XmQCN1W.jpeg" alt="Minha gatinha" style="width:100%; border-radius:10px; margin-bottom:20px;">
     </div>
+    <button id="revealBtn">Clique se quiser ver gayzisse</button>
+    <div id="hiddenContent">
+      <p>Sei que você deve ter ficado brava com a última foto, mas queria que você entendesse que você é linda de qualquer jeito, meu amor. Eu decidi fazer isso agora porque eu gosto de te mostrar o quanto eu te amo, e porque eu sou bem gay por você, não posso negar ksks. Eu sei que depois de tudo você fica se crucificando muito por tudo que aconteceu, mas de verdade, amor, eu quero que você entenda seus erros, mas não sofra com eles pra sempre, porque dói pra crlh ver a pessoa que eu mais amo nesse mundo sofrendo. Às vezes eu sei que você pensa um monte de besteiras, como se não me merecesse, e que só me machuca. Sei até que pensou coisas mais pesadas... Mas saiba que eu não me arrependo nem um segundo de ter mandado mensagem pra aquela garota naquele dia. Se eu não tivesse mandado, eu não estaria com essa pessoa incrível hoje, e eu ainda sei que você é a pessoa certa pra mim. Bom, então me desculpa por ser meio chato às vezes e por fazer você se sentir mal. E obrigado, amor, por estar se esforçando tanto por a gente, eu reconheço e reparo em cada esforço.
+
+Bom, agora é a parte gay, né? Te amo muuuuuuuuuuuito, minha gatinha ❤️ Obrigado por ter entrado na minha vida. Mesmo você sendo fedida, ainda vou casar com você ❤️ Existe declaração maior que essa?</p>
+      <p>Te amo minha princesa❤️</p>
+      <p class="signature">Ass, Zé</p>
+    </div>
+  </div>
+
+  <script>
+    const nextBtn = document.getElementById('nextBtn');
+    const nextSection = document.getElementById('nextSection');
+    const revealBtn = document.getElementById('revealBtn');
+    const hiddenContent = document.getElementById('hiddenContent');
+    const quizSidebar = document.getElementById('quizSidebar');
+    const quizBtn = document.getElementById('quizBtn');
+    const finishBtn = document.getElementById('finishBtn');
+
+    nextBtn.addEventListener('click', () => {
+      nextSection.classList.toggle('visible');
+      nextBtn.textContent = nextSection.classList.contains('visible') ? 'Voltar' : 'Próxima parte';
+    });
+
+    revealBtn.addEventListener('click', () => {
+      hiddenContent.style.display = hiddenContent.style.display === 'block' ? 'none' : 'block';
+    });
+
+    quizBtn.addEventListener('click', () => quizSidebar.classList.add('open'));
+    function closeQuiz() { quizSidebar.classList.remove('open'); }
+  </script>
+
 </body>
 </html>
